@@ -15,7 +15,7 @@ contract SharedFinance is ERC20 {
   struct HolderInfo {
     bool exists;
     uint256 hid;
-    /*uint256 totalEarnings;*/
+    uint256 totalEarnings;
   }
 
   IERC20 private collateral = IERC20(0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174); // USDC
@@ -127,10 +127,10 @@ contract SharedFinance is ERC20 {
   /*
     Returns total earnings for the specified holder address
   */
-  /*
+  
   function holderEarnings(address holder) public view returns (uint256 earns){
     earns = holders[holder].totalEarnings;
-  }*/
+  }
 
   /*
     Returns the BUSD balance of an address
@@ -184,7 +184,7 @@ contract SharedFinance is ERC20 {
       if(balanceOf(holdersList[i]) > 0){
         hshare = balanceOf(holdersList[i]).mul(amount).div(supply);
         _mint(holdersList[i], hshare);
-        //holders[holdersList[i]].totalEarnings += hshare;
+        holders[holdersList[i]].totalEarnings += hshare;
         distributedFees += hshare;
       }
     }
